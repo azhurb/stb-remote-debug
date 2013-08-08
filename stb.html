@@ -20,7 +20,6 @@
             var target = eval(data['target']);
             var result = target[data['method']].apply(null, data['args']);
             console.log(result);
-            //return result;
             socket.send(result);
         }
 

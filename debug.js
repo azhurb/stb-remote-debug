@@ -2,7 +2,7 @@ function execRemoteInvoke(target, method, args){
     var xhr = new XMLHttpRequest();
     xhr.open("post", "http://192.168.1.71:8102/invoke", false);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify({"target" : target, "method" : method, "args" : args}));
+    xhr.send(JSON.stringify({"client" : window.location.hash, "target" : target, "method" : method, "args" : args}));
     return xhr.responseText;
 }
 
@@ -44,5 +44,5 @@ socket.onclose = function(){
 
 socket.onmessage = function(msg){
     console.log(msg);
-}
+};
 
