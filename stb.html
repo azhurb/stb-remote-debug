@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+
+        var socket = new WebSocket("ws://192.168.1.71:8100/upstream");
+
+        socket.onopen = function(){
+            console.log("Socket has been opened!");
+        };
+
+        socket.onclose = function(){
+            console.log("Socket has been closed!");
+        };
+
+        socket.onmessage = function(msg){
+            console.log(msg.data);
+
+            var data = JSON.parse(msg.data);
+            var target = eval(data['target']);
+            var result = target[data['method']].apply(null, data['args']);
+            console.log(result);
+            //return result;
+            socket.send(result);
+        }
+
+    </script>
+</head>
+</html>
